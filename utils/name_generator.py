@@ -56,4 +56,11 @@ class NameGenerator:
     @classmethod
     def get_first_last(cls) -> str:
         return f"{cls.get_first_name()} {cls.get_last_name()}"
+    
+    @classmethod
+    def get_email(cls) -> str:
+        first = cls.get_first_name().lower()
+        last = cls.get_last_name().lower()
+        domains = ['gmail.com', 'mail.ru', 'yandex.ru', 'rambler.ru', 'hotmail.com']
+        return f"{first}.{last}@{random.choice(domains)}"
 
