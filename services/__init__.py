@@ -1,6 +1,8 @@
-from .service1 import Service1
-from .service2 import Service2
-from .service3 import Service3
+from utils.service_loader import load_services
 
-__all__ = ['Service1', 'Service2', 'Service3']
+_services = load_services()
+__all__ = [s.__name__ for s in _services]
+
+def get_all_services():
+    return _services.copy()
 

@@ -2,7 +2,7 @@ import asyncio
 import argparse
 import sys
 from core import Bomber, ProxyManager
-from services import Service1, Service2, Service3
+from services import get_all_services
 
 
 def parse_args():
@@ -19,7 +19,7 @@ def parse_args():
 async def main():
     args = parse_args()
     
-    services = [Service1, Service2, Service3]
+    services = get_all_services()
     
     proxy_manager = None
     if not args.no_proxy:
