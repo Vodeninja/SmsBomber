@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
-from utils import NameGenerator
+from utils import NameGenerator, PhoneFormatter
 
 
 class Totopizza(BaseService):
@@ -13,8 +13,7 @@ class Totopizza(BaseService):
         return "https://api.totopizza.ru/graphql"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "+7 *** *** ** **", 1)
+        formatted_phone = PhoneFormatter.format_no_brackets_spaces(self.phone)
         name = NameGenerator.get_first_name()
         
         data = {

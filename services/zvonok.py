@@ -1,5 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
+from utils import PhoneFormatter
 
 
 class Zvonok(BaseService):
@@ -12,8 +13,7 @@ class Zvonok(BaseService):
         return "https://zvonok.com/api/demo/"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "+7 (***)***-**-**", 1)
+        formatted_phone = PhoneFormatter.format_no_space_after_bracket(self.phone)
         
         data = {
             "csrfmiddlewaretoken": "IR473RdCuTdFJyh1O2PXgiiYrI6DNQFmHiagLFAXOsMlDMdh2DsxuZuEEeOT3kCs",

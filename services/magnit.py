@@ -1,5 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
+from utils import PhoneFormatter
 
 
 class Magnit(BaseService):
@@ -12,8 +13,7 @@ class Magnit(BaseService):
         return "https://new.moy.magnit.ru/local/ajax/login/"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "+ 7 ( *** ) ***-**-**", 1)
+        formatted_phone = PhoneFormatter.format_all_spaces(self.phone)
         
         data = {
             "phone": formatted_phone,

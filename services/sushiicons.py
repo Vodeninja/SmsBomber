@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
-from utils import NameGenerator
+from utils import NameGenerator, PhoneFormatter
 
 
 class Sushiicons(BaseService):
@@ -13,8 +13,7 @@ class Sushiicons(BaseService):
         return "https://sushiicons.com.ua/kiev/index.php?route=common/cart/ajaxgetcoderegister"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("380", "+380 (**) ***-**-**", 1) if phone.startswith("380") else phone.replace("7", "+380 (**) ***-**-**", 1)
+        formatted_phone = PhoneFormatter.format_ukrainian(self.phone)
         firstName = NameGenerator.get_first_name()
         
         data = {

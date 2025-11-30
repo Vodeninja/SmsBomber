@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
-from utils import NameGenerator
+from utils import NameGenerator, PhoneFormatter
 
 
 class Stockmann(BaseService):
@@ -13,8 +13,7 @@ class Stockmann(BaseService):
         return "https://stockmann.ru/ajax/"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "+7 (***) *** - ** - **", 1)
+        formatted_phone = PhoneFormatter.format_spaces_around_dashes(self.phone)
         firstName = NameGenerator.get_first_name()
         lastName = NameGenerator.get_last_name()
         email = NameGenerator.get_email()

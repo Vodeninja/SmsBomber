@@ -1,5 +1,6 @@
 from typing import Dict, Any
 from core.base_service import BaseService
+from utils import PhoneFormatter
 
 
 class VodovozSpb(BaseService):
@@ -12,8 +13,7 @@ class VodovozSpb(BaseService):
         return "https://shop.vodovoz-spb.ru/bitrix/tools/ajax_sms.php"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "+7 (", 1)[:2] + "***) ***-**-**"
+        formatted_phone = PhoneFormatter.format_with_brackets(self.phone)
         
         data = {
             "phone": formatted_phone

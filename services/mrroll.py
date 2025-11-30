@@ -1,5 +1,6 @@
 from typing import Dict, Any, Optional
 from core.base_service import BaseService
+from utils import PhoneFormatter
 
 
 class Mrroll(BaseService):
@@ -15,8 +16,7 @@ class Mrroll(BaseService):
         return "http://mrroll.ru/user/signin"
 
     async def send_sms(self) -> Dict[str, Any]:
-        phone = self._format_phone(self.phone)
-        formatted_phone = phone.replace("7", "(***)***-**-**", 1)
+        formatted_phone = PhoneFormatter.format_brackets_only(self.phone)
         
         data = {
             "_csrf": "",
